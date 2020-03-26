@@ -38,44 +38,37 @@ clean_eIDClient:
 
 clean: clean_cryptopp clean_asn1c clean_libexpat clean_openssl clean_libcurl clean_eIDClient
 
-cryptopp:
-	svn checkout https://svn.code.sf.net/p/cryptopp/code/trunk/c5 cryptopp
-	sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" cryptopp/GNUmakefile	
-	make -C cryptopp all libcryptopp.so
-	make -C cryptopp install PREFIX=$(PREFIX)
-
 asn1c:
-	wget https://lionet.info/soft/asn1c-0.9.24.tar.gz --ca-certificate=trusted_ca/COMODO-chain.pem
-	tar xzf asn1c-0.9.24.tar.gz
-	cd asn1c-0.9.24 ;\
+	git clone https://github.com/vlm/asn1c
+	cd asn1c ;\
+	test -f configure || autoreconf -iv  ;\ 
 	./configure --prefix=$(PREFIX) ;\
 	make install
 
 libexpat:
-	wget http://sourceforge.net/projects/expat/files/expat/2.1.0/expat-2.1.0.tar.gz
-	echo "b08197d146930a5543a7b99e871cba3da614f6f0  expat-2.1.0.tar.gz" | sha1sum -c - ;\
-	tar xzf expat-2.1.0.tar.gz
-	cd expat-2.1.0 ;\
+        git clone https://github.com/libexpat/libexpat.git
+	cd libexpat;\
 	./configure --prefix=$(PREFIX) ;\
 	make install
 	
 openssl:
-	cd OpenSSL ;\
+        git clone https://github.com/openssl/openssl.git ;\
+        cd openssl ;\
 	git submodule init ;\
 	git submodule update ;\
-	./config --prefix=$(PREFIX) shared ;\
+	./config shared ;\
 	make -j8 ;\
 	make install_sw ;\
-	apps/openssl ciphers 'PSK' -v ;\
+	apps/openssl ciphers 'RSAPSK' -v ;\
 	if test $$? -ne 0 ; then \
 		echo "No RSA-PSK cipher suites found. OpenSSL build some somehow failed!" ;\
 		exit 1 ;\
 	fi
 
 libcurl:
-	wget https://github.com/bagder/curl/releases/download/curl-7_44_0/curl-7.44.0.tar.gz
-	tar xzf curl-7.44.0.tar.gz
-	cd curl-7.44.0 ;\
+	git clone https://github.com/curl/curl.git
+	cd curl ;\
+	test -f configure || autoreconf -iv  ;\
 	./configure --prefix=$(PREFIX) PKG_CONFIG_PATH=$(PREFIX)/lib/pkgconfig:$(PREFIX)/lib64/pkgconfig ;\
 	make install
 
