@@ -121,11 +121,18 @@ the library.
 ### OpenSSL
 
 ```sh
-cd ${PREFIX}/OpenSSL_1_0_2-stable 
-git submodule init 
-git submodule update 
-./config --prefix=${PREFIX} shared 
-make 
+git clone https://github.com/openssl/openssl.git ;\
+cd openssl ;\
+git submodule init ;\
+git submodule update ;\
+./config shared ;\
+make -j8 ;\
+make install_sw ;\
+apps/openssl ciphers 'RSAPSK' -v ;\
+if test $$? -ne 0 ; then \
+	echo "No RSA-PSK cipher suites found. OpenSSL build some somehow failed!" ;\
+	exit 1 ;\
+fi
 make install_sw 
 ```
 
