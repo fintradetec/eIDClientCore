@@ -10,8 +10,7 @@ All relevant information about the eIDClientCore can be found at:
 
 # Welcome 
 
-Warning: This is just proof-of-concept code and should _NOT_ be used in
-production environments
+This is a proof-of-concept and not designed for the use in production environments.
 
 ## Tested platforms:
 
