@@ -85,10 +85,10 @@ eIDClientCore has the following dependencies:
 ### Crypto++
 
 ```sh
-    git clone https://github.com/weidai11/cryptopp.git
-	sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" cryptopp/GNUmakefile	
-	make -C cryptopp all libcryptopp.so
-	make -C cryptopp install PREFIX=$(PREFIX)    
+git clone https://github.com/weidai11/cryptopp.git
+sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" cryptopp/GNUmakefile	
+make -C cryptopp all libcryptopp.so
+make -C cryptopp install PREFIX=$(PREFIX)    
 ```
 
 You can skip compilation of Crypto++ when using your distributions version of
