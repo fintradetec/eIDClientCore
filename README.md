@@ -1,7 +1,12 @@
-# Welcome
+# Preamble 
+
+"The Humboldt-Universität zu Berlin, Unter den Linden 6, 10099 Berlin", from now on referred to as Humboldt-Universität, provides for the application in connection with German sovereign documents, such as the new identity card and the electronic residence permit, a client-side eID necessary software for providing the so-called eID functionality, d. i.e., enabling an electronic proof of identity, which is based on the guidelines of the BSI TR-03110, TR-03112, TR-03130, in the development state in which it is at the time of provision. This software, from now on, referred to as eIDClientCore, has been received by Humboldt-Universität from Bundesdruckerei GmbH, Oranienstraße 91, 10969 Berlin for use in teaching and research and for provision to the public ("hosting") for general review and use by anyone.
 
 All relevant information about the eIDClientCore can be found at:
-http://sar.informatik.hu-berlin.de/BeID-lab/eIDClientCore
+
+* http://sar.informatik.hu-berlin.de/BeID-lab/eIDClientCore
+
+# Welcome 
 
 Warning: This is just proof-of-concept code and should _NOT_ be used in
 production environments
@@ -15,6 +20,7 @@ production environments
 * Mac OS X
 * Android
 * iOS
+* Raspberry PI
 * Travis CI (Ubuntu Linux) [![Build Status](https://travis-ci.org/BeID-lab/eIDClientCore.svg?branch=master)](https://travis-ci.org/BeID-lab/eIDClientCore)
 
 ## Usage
@@ -23,6 +29,7 @@ production environments
 
 For using eIDClientCore applications should use
 [eIDClientCore.h](lib/eIDClientCore/eIDClientCore.h)
+
 The application initiates the electronic identification by calling
 `nPAeIdPerformAuthenticationProtocol`. To enter the PIN, the application shall
 define a user interaction call back. Also, the state call back informs the
@@ -30,9 +37,10 @@ application about completed protocol steps.
 
 The application may also choose to use
 [eIDClientConnection.h](lib/eIDClientConnection/eIDClientConnection.h)
-which, by default, is basically a wrapper around libcurl. However, you may want
-to choose to replace the implementation of eIDClientConnection with a wrapper
-to your platform dependent solution.
+which, by default, is basically a wrapper around libcurl. 
+
+However, you may wantto choose to replace the implementation of eIDClientConnection 
+with a wrapper to your platform dependent solution.
 
 ### JNI wrappers for Android
 
