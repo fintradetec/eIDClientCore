@@ -29,27 +29,17 @@ This is a proof-of-concept and not designed for the use in production environmen
 For using eIDClientCore applications should use
 [eIDClientCore.h](lib/eIDClientCore/eIDClientCore.h)
 
-The application initiates the electronic identification by calling
-`nPAeIdPerformAuthenticationProtocol`. To enter the PIN, the application shall
-define a user interaction call back. Also, the state call back informs the
-application about completed protocol steps.
+The application initiates the electronic identification by calling`nPAeIdPerformAuthenticationProtocol`. To enter the PIN, the application shall define a user interaction call back. Also, the state call back informs the application about completed protocol steps.
 
-The application may also choose to use
-[eIDClientConnection.h](lib/eIDClientConnection/eIDClientConnection.h)
-which, by default, is basically a wrapper around libcurl. 
+The application may also choose to use [eIDClientConnection.h](lib/eIDClientConnection/eIDClientConnection.h) which, by default, is basically a wrapper around libcurl. 
 
-However, you may wantto choose to replace the implementation of eIDClientConnection 
-with a wrapper to your platform dependent solution.
+However, you may wantto choose to replace the implementation of eIDClientConnection with a wrapper to your platform dependent solution.
 
 ### JNI wrappers for Android
 
-For android we build JNI wrappers to our C++ implementation. The public
-Java interface is accessed through the
-[EidClient class](android/eIDClientLib/src/de/bdr/eidclient/EidClient.java)
-Electronic identification is triggered similar to its C-counterpart.
-Additionally the Android application has to pass an implementation of the
-[Reader class](android/eIDClientLib/src/de/bdr/eidclient/reader/Reader.java)
-to do the actual communication with the card.
+For android we build JNI wrappers to our C++ implementation. The public Java interface is accessed through the [EidClient class](android/eIDClientLib/src/de/bdr/eidclient/EidClient.java) 
+
+Electronic identification is triggered similar to its C-counterpart. Additionally the Android application has to pass an implementation of the [Reader class](android/eIDClientLib/src/de/bdr/eidclient/reader/Reader.java) to do the actual communication with the card.
 
 # Building for Linux
 
@@ -63,21 +53,23 @@ You can then change in the eIDClientCore directory and install the prerequisites
 
 ```sh
 cd eIDClientCore
-make all
+make
 ```
 
-If you want to install manually you can use the following guide. 
-We assume that PREFIX is set to the directory eIDClientCore in the target installation directory.
+If you want to install manually you can use the following guide. We assume that PREFIX is set to the directory eIDClientCore in the target installation directory, and you are, in your terminal are actually inside the directory.
 
 ## Compiling Prerequisites from source
 
 eIDClientCore has the following dependencies:
+
 * Crypto++
 * asn1c (at least version 0.9.23)
 * libexpat
 * PC/SC development files (if PC/SC smart card readers shall be used)
 * OpenSSL patched for RSA-PSK
 * libcurl (using the patched OpenSSL)
+
+You can either compile from source or use the operating system package manager and pre-install the requirements. If you do this adjust the make operation, and just compile eIDClientCore. Check the settings for PSK when you use OpenSSL, and select the valid RSA PSK you need.
 
 ### Crypto++
 
@@ -91,7 +83,7 @@ make -C cryptopp install PREFIX=$(PREFIX)
 You can skip compilation of Crypto++ when using your distributions version of
 the library.
 
-### asn1c
+### asn1c (ASN Compiler)
 
 ```sh
 git clone https://github.com/vlm/asn1c
@@ -106,7 +98,7 @@ to edit [eidasn1's Makefile.am](lib/eidasn1/Makefile.am#L1-9).
 
 You need to change the commented lines so that they meet the version of asn1c.
 
-### libexpat
+### libexpat (Fast streaming XML parser)
 
 ```sh
 git clone https://github.com/libexpat/libexpat.git
@@ -118,7 +110,7 @@ make install
 You can skip compilation of libexpat when using your distributions version of
 the library.
 
-### OpenSSL
+### OpenSSL 
 
 ```sh
 git clone https://github.com/openssl/openssl.git ;\
@@ -138,7 +130,7 @@ make install_sw
 
 OpenSSL is the only library that needs to be patched since it does currently not support RSA-PSK. 
 
-### libcurl
+### libcurl (Multiprotocol file transfer library)
 
 ```sh
 git clone https://github.com/curl/curl.git
@@ -151,7 +143,7 @@ make install
 If you want to use your distributions version of curl will need to make sure it
 uses the patched version of OpenSSL at runtime (see above).
 
-### wxWidgets
+### wxWidgets (Cross-Platform GUI Library)
 
 To build the SimpleClient wxWidgets (Release >= 3.0.0) is required. The name of the required package in OpenSuse is wxWidgets-3_0-devel.
 Alternatively wxWidgets can be downloaded and compiled manually ([https://wiki.wxwidgets.org/Install](https://wiki.wxwidgets.org/Install)):
@@ -167,7 +159,7 @@ make install
 cd -
 ```
 
-## Compiling eIDClientCore from source
+## Compiling eIDClientCore
 
 ```sh
 git clone https://github.com/BeID-lab/eIDClientCore.git
@@ -177,6 +169,7 @@ env LD_LIBRARY_PATH=${PREFIX}/lib:${PREFIX}/lib64 ./configure --prefix=${PREFIX}
     --with-openssl=${PREFIX} --with-libcurl=${PREFIX} \
     PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig:${PREFIX}/lib64/pkgconfig \
     ASN1C=${PREFIX}/bin/asn1c
+make
 make install
 cd -
 ```
@@ -234,3 +227,4 @@ android update project \
 * Check if the Terminal certificate is up to date
 * Check the Subject URL of the Terminal certificate
 * remove the use of exceptions
+* Autogenerate Python Library
