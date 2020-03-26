@@ -72,8 +72,6 @@ make all
 If you want to install manually you can use the following guide. 
 We assume that PREFIX is set to the directory eIDClientCore in the target installation directory.
 
-
-
 ## Compiling Prerequisites from source
 
 eIDClientCore has the following dependencies:
@@ -87,10 +85,10 @@ eIDClientCore has the following dependencies:
 ### Crypto++
 
 ```sh
-svn checkout https://svn.code.sf.net/p/cryptopp/code/trunk/c5 cryptopp
-sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" ${PREFIX}/cryptopp/GNUmakefile
-make -C cryptopp all libcryptopp.so
-make -C cryptopp install PREFIX=${PREFIX}
+    git clone https://github.com/weidai11/cryptopp.git
+	sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" cryptopp/GNUmakefile	
+	make -C cryptopp all libcryptopp.so
+	make -C cryptopp install PREFIX=$(PREFIX)    
 ```
 
 You can skip compilation of Crypto++ when using your distributions version of
@@ -99,29 +97,25 @@ the library.
 ### asn1c
 
 ```sh
-wget https://lionet.info/soft/asn1c-0.9.24.tar.gz --ca-certificate=trusted_ca/COMODORSADomainValidationSecureServerCA.pem
-tar xzf asn1c-0.9.24.tar.gz
-cd asn1c-0.9.24
-./configure --prefix=${PREFIX}
+git clone https://github.com/vlm/asn1c
+cd asn1c ;\
+test -f configure || autoreconf -iv  ;\ 
+./configure --prefix=$(PREFIX) ;\
 make install
-cd -
 ```
 
 If you want to use your distributions version of asn1c you will propably have
-to edit
-[eidasn1's Makefile.am](lib/eidasn1/Makefile.am#L1-9).
+to edit [eidasn1's Makefile.am](lib/eidasn1/Makefile.am#L1-9).
+
 You need to change the commented lines so that they meet the version of asn1c.
 
 ### libexpat
 
 ```sh
-wget http://sourceforge.net/projects/expat/files/expat/2.1.0/expat-2.1.0.tar.gz
-echo "b08197d146930a5543a7b99e871cba3da614f6f0 expat-2.1.0.tar.gz" | sha1sum -c -
-tar xzf expat-2.1.0.tar.gz
-cd expat-2.1.0
-./configure --prefix=${PREFIX}
+git clone https://github.com/libexpat/libexpat.git
+cd libexpat;\
+./configure --prefix=$(PREFIX) ;\
 make install
-cd -
 ```
 
 You can skip compilation of libexpat when using your distributions version of
@@ -138,19 +132,16 @@ make
 make install_sw 
 ```
 
-OpenSSL is the only library that needs to be patched since it does currently
-not support RSA-PSK. 
+OpenSSL is the only library that needs to be patched since it does currently not support RSA-PSK. 
 
 ### libcurl
 
 ```sh
-wget https://github.com/bagder/curl/releases/download/curl-7_44_0/curl-7.44.0.tar.gz
-tar xzf curl-7.44.0.tar.gz
-cd curl-7.44.0
-./configure --prefix=${PREFIX} \
-    PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig:${PREFIX}/lib64/pkgconfig
+git clone https://github.com/curl/curl.git
+cd curl ;\
+test -f configure || autoreconf -iv  ;\
+./configure --prefix=$(PREFIX) PKG_CONFIG_PATH=$(PREFIX)/lib/pkgconfig:$(PREFIX)/lib64/pkgconfig ;\
 make install
-cd -
 ```
 
 If you want to use your distributions version of curl will need to make sure it
@@ -185,7 +176,6 @@ env LD_LIBRARY_PATH=${PREFIX}/lib:${PREFIX}/lib64 ./configure --prefix=${PREFIX}
 make install
 cd -
 ```
-
 
 # Building for Android
 
