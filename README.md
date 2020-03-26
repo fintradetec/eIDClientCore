@@ -128,7 +128,7 @@ git submodule update ;\
 ./config shared ;\
 make -j8 ;\
 make install_sw ;\
-apps/openssl ciphers 'PSK' -v ;\
+apps/openssl ciphers -v 'PSK' ;\
 if test $$? -ne 0 ; then \
 	echo "No RSA-PSK cipher suites found. OpenSSL build some somehow failed!" ;\
 	exit 1 ;\
