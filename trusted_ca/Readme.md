@@ -5,6 +5,15 @@ A certificate authority (CA) is a trusted entity that issues digital certificate
 To check validity of the certificate
 
       $ openssl x509 -in certificate.crt -text -noout
+      
+To check validity with an untrusted ca-bundle 
+
+      $ openssl verify -untrusted ca-bundle cert.pem      
+
+To check online you may use web services similar to: 
+
+* https://www.sslshopper.com/certificate-decoder.html
+
 
 Example Outpub:
 
