@@ -38,6 +38,11 @@ clean_eIDClient:
 
 clean: clean_cryptopp clean_asn1c clean_libexpat clean_openssl clean_libcurl clean_eIDClient
 
+cryptopp:
+        git clone https://github.com/weidai11/cryptopp.git
+        sed -i.org -e "s%^#.*\(CXXFLAGS += -fPIC.*\)%\1%g" cryptopp/GNUmakefile
+        make -C cryptopp all libcryptopp.so
+        make -C cryptopp install PREFIX=$(PREFIX)
 asn1c:
 	git clone https://github.com/vlm/asn1c
 	cd asn1c ;\
