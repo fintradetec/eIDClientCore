@@ -1,6 +1,8 @@
 # Preamble 
 
-"The Humboldt-Universität zu Berlin, Unter den Linden 6, 10099 Berlin", from now on referred to as Humboldt-Universität, provides for the application in connection with German sovereign documents, such as the new identity card and the electronic residence permit, a client-side eID necessary software for providing the so-called eID functionality, d. i.e., enabling an electronic proof of identity, which is based on the guidelines of the BSI TR-03110, TR-03112, TR-03130, in the development state in which it is at the time of provision. This software, from now on, referred to as eIDClientCore, has been received by Humboldt-Universität from Bundesdruckerei GmbH, Oranienstraße 91, 10969 Berlin for use in teaching and research and for provision to the public ("hosting") for general review and use by anyone.
+The Humboldt-Universität zu Berlin, Unter den Linden 6, 10099 Berlin, from now on referred to as Humboldt-Universität, provides for the application in connection with German sovereign documents, such as the new identity card and the electronic residence permit, a client-side eID necessary software for providing the so-called eID functionality, i.e., enabling an electronic proof of identity, which is based on the guidelines of the BSI TR-03110, TR-03112, TR-03130, in the development state in which it is at the time of provision. 
+
+This software, from now on, referred to as eIDClientCore, has been received by Humboldt-Universität from Bundesdruckerei GmbH, Oranienstraße 91, 10969 Berlin for use in teaching and research and for provision to the public ("hosting") for general review and use by anyone.
 
 All relevant information about the eIDClientCore can be found at:
 
