@@ -1,6 +1,4 @@
-# Installation on Max OS X
-
-# Using "$ brew"
+## Installation on Max OS X, using brew
 
 ### Install Brew
 
@@ -19,15 +17,15 @@
 Download and install reiner sct basis ccid-driver   http://www.reiner-sct.com/support/download/treiber-und-software/cyberjack/rfid-basis-macos.html?grp=kontaktlos
 
 # eIDClientCore
-autoreconf -vis
-./configure \
-  CFLAGS="-I/opt/local/include" \
-  LIBS="-Wl,-framework,PCSC -L/opt/local/lib -lgcrypt" \
-  PCSC_LIBS="-Wl,-framework,PCSC" \
-  PCSC_CFLAGS=-I"/usr/local/include/PCSC -I/Library/Frameworks/jsoncpp.framework/Versions/2.0.0/Headers/json -framework PCSC" \
-  CRYPTOPP_CFLAGS="-I/usr/include" \
-  CRYPTOPP_LIBS="-L/usr/lib -lcryptopp"
-make
+     autoreconf -vis
+     ./configure \
+       CFLAGS="-I/opt/local/include" \
+       LIBS="-Wl,-framework,PCSC -L/opt/local/lib -lgcrypt" \
+       PCSC_LIBS="-Wl,-framework,PCSC" \
+       PCSC_CFLAGS=-I"/usr/local/include/PCSC -I/Library/Frameworks/jsoncpp.framework/Versions/2.0.0/Headers/json -framework PCSC" \
+       CRYPTOPP_CFLAGS="-I/usr/include" \
+       CRYPTOPP_LIBS="-L/usr/lib -lcryptopp"
+     make
 
 # if gnutls can't find gcrypt:
 
