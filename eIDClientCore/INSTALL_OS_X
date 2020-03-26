@@ -1,11 +1,22 @@
-install ports
+# Installation on Max OS X
 
-port install automake autoconf libtool pkgconfig wget libcryptopp libgcrypt libusb
+# Using "$ brew"
 
-make and install asn1c-0.9.24
-make and install cryptopp-562 (make dynamic)
+### Install Brew
 
-download and install reiner sct basis ccid-driver   http://www.reiner-sct.com/support/download/treiber-und-software/cyberjack/rfid-basis-macos.html?grp=kontaktlos
+     $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+### Install required libraries and tools for compilation of source code
+
+     $ brew install automake autoconf libtool pkgconfig wget libcryptopp libgcrypt libusb
+
+### Install asn1c (ASN 1 Compiler)
+     $ brew install asn1c
+     $ brew install cryptopp
+
+### ccid-driver
+
+Download and install reiner sct basis ccid-driver   http://www.reiner-sct.com/support/download/treiber-und-software/cyberjack/rfid-basis-macos.html?grp=kontaktlos
 
 # eIDClientCore
 autoreconf -vis
@@ -19,4 +30,5 @@ autoreconf -vis
 make
 
 # if gnutls can't find gcrypt:
-lib/eIDClientConnection/gnutls-2.10.2/configure CFLAGS="-I/opt/local/include" LIBS="-L/opt/local/lib -lgcrypt"
+
+     $ lib/eIDClientConnection/gnutls-2.10.2/configure CFLAGS="-I/opt/local/include" LIBS="-L/opt/local/lib -lgcrypt"
