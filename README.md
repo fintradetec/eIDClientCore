@@ -71,7 +71,7 @@ eIDClientCore has the following dependencies:
 
 You can either compile from source or use the operating system package manager and pre-install the requirements. If you do this adjust the make operation, and just compile eIDClientCore. Check the settings for PSK when you use OpenSSL, and select the valid RSA PSK you need.
 
-### Crypto++
+### Crypto++ (C++ Library for Cryptography)
 
 ```sh
 git clone https://github.com/weidai11/cryptopp.git
