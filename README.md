@@ -19,15 +19,14 @@ This is a proof-of-concept and not designed for the use in production environmen
 * Mac OS X
 * Android
 * iOS
-* Raspberry PI
+* Raspberry Pi
 * Travis CI (Ubuntu Linux) [![Build Status](https://travis-ci.org/BeID-lab/eIDClientCore.svg?branch=master)](https://travis-ci.org/BeID-lab/eIDClientCore)
 
 ## Usage
 
 ### C library interface
 
-For using eIDClientCore applications should use
-[eIDClientCore.h](lib/eIDClientCore/eIDClientCore.h)
+For using eIDClientCore applications should use [eIDClientCore.h](lib/eIDClientCore/eIDClientCore.h)
 
 The application initiates the electronic identification by calling`nPAeIdPerformAuthenticationProtocol`. To enter the PIN, the application shall define a user interaction call back. Also, the state call back informs the application about completed protocol steps.
 
@@ -227,4 +226,4 @@ android update project \
 * Check if the Terminal certificate is up to date
 * Check the Subject URL of the Terminal certificate
 * remove the use of exceptions
-* Autogenerate Python Library
+* Autogenerate Python Library based on "lib/eIDClientCore/eIDClientCore.h"
