@@ -1,6 +1,6 @@
 ## Installation on Max OS X, using brew
 
-### Install Brew
+### Install [Brew](https://brew.sh)
 
      $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
